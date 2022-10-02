@@ -80,5 +80,10 @@
     "branches": [
       "main"
     ]
+  },
+  "dependencies": {
+    "@types/node-jose": "^1.1.10",
+    "axios": "^0.27.2",
+    "node-jose": "^2.1.1"
   }
 }
