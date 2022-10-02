@@ -4,7 +4,7 @@
   "description": "Template repository for us to use to create TS based backend packages",
   "scripts": {
     "clean": "rm -rf ./lib/",
-    "build": "npm run clean && npm run build:esm && npm run build:cjs",
+    "build": "yarn clean && yarn build:esm && yarn build:cjs",
     "build:esm": "tsc -p ./tsconfig.esm.json && mv lib/esm/index.js lib/esm/index.mjs",
     "build:cjs": "tsc -p ./tsconfig.cjs.json",
     "cm": "cz",
@@ -12,7 +12,8 @@
     "lint": "eslint ./src/ --fix",
     "prepare": "husky install",
     "semantic-release": "semantic-release",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "test": "yarn lint && yarn type-check"
   },
   "main": "./lib/src/index.js",
   "files": [
