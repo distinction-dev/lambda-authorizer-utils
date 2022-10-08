@@ -28,9 +28,12 @@
     "url": "https://github.com/killdozerx2"
   },
   "keywords": [
-    "firebase",
-    "frontend",
-    "typescript"
+    "typescript",
+    "aws",
+    "aws lambda",
+    "lambda",
+    "authorizer",
+    "lambda authorizer"
   ],
   "bugs": {
     "url": "https://github.com/distinction-dev/lambda-authorizer-utils/issues"
