@@ -1,12 +1,10 @@
 {
   "name": "@distinction-dev/lambda-authorizer-utils",
   "version": "0.0.0-development",
-  "description": "Template repository for us to use to create TS based backend packages",
+  "description": "Collection of utilities and helper functions to make working with Lambda Authorizers easy",
   "scripts": {
     "clean": "rm -rf ./lib/",
-    "build": "yarn clean && yarn build:esm && yarn build:cjs",
-    "build:esm": "tsc -p ./tsconfig.esm.json && mv lib/esm/index.js lib/esm/index.mjs",
-    "build:cjs": "tsc -p ./tsconfig.cjs.json",
+    "build": "yarn clean && tsc -p ./tsconfig.json",
     "cm": "cz",
     "coverage": "codecov",
     "lint": "eslint ./src/ --fix",
@@ -15,22 +13,10 @@
     "type-check": "tsc --noEmit",
     "test": "yarn lint && yarn type-check"
   },
-  "main": "./lib/src/index.js",
+  "main": "./lib/index.js",
   "files": [
     "lib/**/*"
   ],
-  "exports": {
-    ".": {
-      "import": {
-        "types": "./lib/esm/types/index.d.ts",
-        "default": "./lib/esm/index.mjs"
-      },
-      "require": {
-        "types": "./lib/cjs/types/index.d.ts",
-        "default": "./lib/cjs/index.js"
-      }
-    }
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/distinction-dev/lambda-authorizer-utils.git"
@@ -50,6 +36,11 @@
     "url": "https://github.com/distinction-dev/lambda-authorizer-utils/issues"
   },
   "homepage": "https://github.com/distinction-dev/lambda-authorizer-utils#readme",
+  "dependencies": {
+    "@types/node-jose": "^1.1.10",
+    "axios": "^0.27.2",
+    "node-jose": "^2.1.1"
+  },
   "devDependencies": {
     "@types/node": "^12.20.11",
     "@typescript-eslint/eslint-plugin": "^4.22.0",
@@ -80,10 +71,5 @@
     "branches": [
       "main"
     ]
-  },
-  "dependencies": {
-    "@types/node-jose": "^1.1.10",
-    "axios": "^0.27.2",
-    "node-jose": "^2.1.1"
   }
 }

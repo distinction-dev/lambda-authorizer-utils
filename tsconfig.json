@@ -12,7 +12,13 @@
     "paths": {
       "@/*": ["src/*"]
     },
-    "baseUrl": "."
+    "baseUrl": ".",
+    "lib": ["ES6", "DOM"],
+    "target": "ES5",
+    "module": "CommonJS",
+    "moduleResolution": "node",
+    "outDir": "./lib",
+    "declarationDir": "./lib/types"
   },
   "include": ["src/**/*.ts"]
 }
