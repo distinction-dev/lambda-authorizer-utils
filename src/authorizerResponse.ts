@@ -81,7 +81,13 @@ export class AuthorizerResponse {
   stage: string;
   context?: Record<string, string | number | boolean>;
   usageIdentifierKey?: string;
+  /**
+   * An array containing all the routes that a user is allowed for
+   */
   private allowedRoutes: Array<AwsRoute>;
+  /**
+   * An array containing all the routes that a user is denied for
+   */
   private deniedRoutes: Array<AwsRoute>;
 
   /**
