@@ -42,18 +42,18 @@ export enum HttpVerbsEnum {
   OPTIONS = "OPTIONS",
   ALL = "*",
 }
-type AwsPolicyCondition = Record<string, Record<string, string>>;
-type AwsRoute = {
+export type AwsPolicyCondition = Record<string, Record<string, string>>;
+export type AwsRoute = {
   resourceArn: string;
   conditions?: Array<AwsPolicyCondition>;
 };
-type AwsStatement = {
+export type AwsStatement = {
   Action: string;
   Effect: "Allow" | "Deny";
   Resource: Array<string>;
   Condition?: Array<AwsPolicyCondition>;
 };
-type AwsPolicy = {
+export type AwsPolicy = {
   principalId: string;
   policyDocument: {
     Version: "2012-10-17";

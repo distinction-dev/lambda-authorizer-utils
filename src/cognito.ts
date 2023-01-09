@@ -24,7 +24,7 @@ export interface Claims {
   username: string;
 }
 
-export default class CognitoVerifier {
+export class CognitoVerifier {
   private userPoolId: string;
   private region: string;
   private publicKeys: Array<PublicKey> | null = null;
