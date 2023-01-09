@@ -45,7 +45,7 @@ ___
 
 ### publicKeys
 
-• `Private` **publicKeys**: ``null`` \| [`PublicKey`](../interfaces/PublicKey.md)[] = `null`
+• `Private` **publicKeys**: ``null`` \| [`PublicKey`](interfaces/PublicKey.md)[] = `null`
 
 #### Defined in
 
@@ -75,11 +75,11 @@ ___
 
 ### fetchKeys
 
-▸ `Private` **fetchKeys**(): `Promise`<[`PublicKey`](../interfaces/PublicKey.md)[]\>
+▸ `Private` **fetchKeys**(): `Promise`<[`PublicKey`](interfaces/PublicKey.md)[]\>
 
 #### Returns
 
-`Promise`<[`PublicKey`](../interfaces/PublicKey.md)[]\>
+`Promise`<[`PublicKey`](interfaces/PublicKey.md)[]\>
 
 #### Defined in
 
@@ -89,11 +89,11 @@ ___
 
 ### getPublicKeys
 
-▸ `Private` **getPublicKeys**(): `Promise`<[`PublicKey`](../interfaces/PublicKey.md)[]\>
+▸ `Private` **getPublicKeys**(): `Promise`<[`PublicKey`](interfaces/PublicKey.md)[]\>
 
 #### Returns
 
-`Promise`<[`PublicKey`](../interfaces/PublicKey.md)[]\>
+`Promise`<[`PublicKey`](interfaces/PublicKey.md)[]\>
 
 #### Defined in
 

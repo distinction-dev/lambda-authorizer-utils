@@ -29,7 +29,7 @@ Documentation:-
 
 ### allowedRoutes
 
-• `Private` **allowedRoutes**: [`AwsRoute`](../modules.md#awsroute)[]
+• `Private` **allowedRoutes**: [`AwsRoute`](modules.md#awsroute)[]
 ___
 
 ### apiId
@@ -49,7 +49,7 @@ ___
 
 ### deniedRoutes
 
-• `Private` **deniedRoutes**: [`AwsRoute`](../modules.md#awsroute)[]
+• `Private` **deniedRoutes**: [`AwsRoute`](modules.md#awsroute)[]
 ___
 
 ### pathRegex
@@ -98,9 +98,9 @@ Adds an API Gateway method (Http verb + Resource path) to the list of allowed me
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `method` | [`HttpVerbsEnum`](../enums/HttpVerbsEnum.md) | The method type of this route |
+| `method` | [`HttpVerbsEnum`](enums/HttpVerbsEnum.md) | The method type of this route |
 | `path` | `string` | The resource path of this route |
-| `conditions` | [`AwsPolicyCondition`](../modules.md#awspolicycondition)[] | - |
+| `conditions` | [`AwsPolicyCondition`](modules#awspolicycondition)[] | - |
 ___
 
 ### denyAllRoutes
@@ -121,14 +121,14 @@ Adds an API Gateway method (Http verb + Resource path) to the list of denied met
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `method` | [`HttpVerbsEnum`](../enums/HttpVerbsEnum.md) | The method type of this route |
+| `method` | [`HttpVerbsEnum`](enums/HttpVerbsEnum.md) | The method type of this route |
 | `path` | `string` | The resource path of this route |
-| `conditions` | [`AwsPolicyCondition`](../modules.md#awspolicycondition)[] | - |
+| `conditions` | [`AwsPolicyCondition`](modules.md#awspolicycondition)[] | - |
 ___
 
 ### getPolicy
 
-▸ **getPolicy**(): [`AwsPolicy`](../modules.md#awspolicy)
+▸ **getPolicy**(): [`AwsPolicy`](modules.md#awspolicy)
 
 Generates the policy document based on the internal lists of allowed and denied conditions.
 This will generate a policy with two main statements for the effect:

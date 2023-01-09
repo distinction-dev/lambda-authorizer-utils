@@ -1,4 +1,4 @@
-[@distinction-dev/lambda-authorizer-utils](../README.md) / [Exports](../modules.md) / HttpVerbsEnum
+[@distinction-dev/lambda-authorizer-utils](../README.md) / [Exports](modules.md) / HttpVerbsEnum
 
 # Enumeration: HttpVerbsEnum
 

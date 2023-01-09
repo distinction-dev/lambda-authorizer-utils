@@ -1,4 +1,4 @@
-[@distinction-dev/lambda-authorizer-utils](../README.md) / [Exports](../modules.md) / PublicKey
+[@distinction-dev/lambda-authorizer-utils](../README.md) / [Exports](modules.md) / PublicKey
 
 # Interface: PublicKey
 
