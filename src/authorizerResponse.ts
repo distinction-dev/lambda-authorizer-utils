@@ -33,15 +33,18 @@ export function buildRouteArn(
 /**
  * Enum of Http Verbs
  */
-export enum HttpVerbsEnum {
-  GET = "GET",
-  POST = "POST",
-  PUT = "PUT",
-  HEAD = "HEAD",
-  DELETE = "DELETE",
-  OPTIONS = "OPTIONS",
-  ALL = "*",
-}
+export const HttpVerbsEnum = {
+  GET: "GET",
+  POST: "POST",
+  PUT: "PUT",
+  HEAD: "HEAD",
+  DELETE: "DELETE",
+  OPTIONS: "OPTIONS",
+  ALL: "*",
+} as const;
+
+export type HttpVerbsEnum = typeof HttpVerbsEnum[keyof typeof HttpVerbsEnum];
+
 export type AwsPolicyCondition = Record<string, Record<string, string>>;
 export type AwsRoute = {
   resourceArn: string;
