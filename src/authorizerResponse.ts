@@ -227,8 +227,9 @@ export class AuthorizerResponse {
     method: HttpVerbsEnum,
     path: string,
     conditions: Array<AwsPolicyCondition>
-  ): void {
+  ): AuthorizerResponse {
     this.addRoute("Allow", method, path, conditions);
+    return this;
   }
 
   /**
@@ -240,8 +241,9 @@ export class AuthorizerResponse {
     method: HttpVerbsEnum,
     path: string,
     conditions: Array<AwsPolicyCondition>
-  ): void {
+  ): AuthorizerResponse {
     this.addRoute("Deny", method, path, conditions);
+    return this;
   }
 
   /**
