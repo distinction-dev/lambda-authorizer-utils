@@ -16,7 +16,8 @@
     "test": "yarn lint && yarn type-check",
     "docs": "typedoc --plugin typedoc-plugin-markdown --out docs src/index.ts"
   },
-  "main": "./lib/index.js",
+  "main": "./lib/cjs/index.js",
+  "types": "./lib/cjs/types",
   "files": [
     "lib/**/*"
   ],
