@@ -38,20 +38,6 @@ export type ApiGatewayArnParts = {
 };
 
 /**
- * @param arn This is the arn you receive as methodArn in the event,  Example:- arn:aws:execute-api:us-east-1:123456789012:abcdef123/test/GET/request
- */
-export function parseApiGatewayArn(arn: string): ApiGatewayArnParts {
-  const arnParts = arn.split(":");
-  const apiGatewayParts = arnParts[5].split("/");
-  return {
-    region: arnParts[3],
-    awsAccountId: arnParts[3],
-    apiId: apiGatewayParts[0],
-    stage: apiGatewayParts[1],
-  };
-}
-
-/**
  * Enum of Http Verbs
  */
 export const HttpVerbsEnum = {
@@ -153,6 +139,19 @@ export class AuthorizerResponse {
     this.usageIdentifierKey = usageIdentifierKey;
     this.allowedRoutes = [];
     this.deniedRoutes = [];
+  }
+  /**
+   * @param arn This is the arn you receive as methodArn in the event,  Example:- arn:aws:execute-api:us-east-1:123456789012:abcdef123/test/GET/request
+   */
+  public static parseApiGatewayArn(arn: string): ApiGatewayArnParts {
+    const arnParts = arn.split(":");
+    const apiGatewayParts = arnParts[5].split("/");
+    return {
+      region: arnParts[3],
+      awsAccountId: arnParts[3],
+      apiId: apiGatewayParts[0],
+      stage: apiGatewayParts[1],
+    };
   }
 
   private static getEmptyStatement(effect: "Allow" | "Deny"): AwsStatement {
