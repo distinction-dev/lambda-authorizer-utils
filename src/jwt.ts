@@ -1,5 +1,6 @@
 import axios from "axios";
 import * as jose from "node-jose";
+import jwtDecode from "jwt-decode";
 
 export interface PublicKey {
   kid: string;
@@ -48,6 +49,24 @@ export class Verifier<T extends BaseClaims> {
         timeout: 5000,
       })
     ).data.keys;
+  }
+
+  /**
+   * A very common strategy is for people to add Bearer since token authentication used to be called bearer auth
+   * @param inputToken The input token you get from the request
+   * @returns {string}
+   */
+  public static getCleanedJwt(inputToken: string): string {
+    return inputToken.replace("Bearer", "").trim();
+  }
+
+  /**
+   * Parses and return payload of the token without any actual verification
+   * @param inputToken
+   * @returns
+   */
+  public getParsedToken(inputToken: string): T {
+    return jwtDecode<T>(Verifier.getCleanedJwt(inputToken));
   }
 
   /**
