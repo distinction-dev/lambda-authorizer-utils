@@ -1,6 +1,6 @@
 import { BaseClaims, Verifier } from "@/jwt";
 
-export class CognitoVerifier<T extends BaseClaims> extends Verifier<T> {
+export class Ws02Verifier<T extends BaseClaims> extends Verifier<T> {
   /**
    * BaseUrl for issuer host
    */
