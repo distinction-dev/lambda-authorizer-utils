@@ -1,7 +1,7 @@
 /**
  * Deny access to the api completely
  */
-export const DENY_ALL_RESPONSE = {
+export const DENY_ALL_RESPONSE: AwsPolicy = {
   principalId: "deny-all-user",
   policyDocument: {
     Version: "2012-10-17",
