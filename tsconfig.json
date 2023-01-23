@@ -9,9 +9,6 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "allowSyntheticDefaultImports": true,
-    "paths": {
-      "@/*": ["src/*"]
-    },
     "baseUrl": ".",
     "lib": ["ES6", "DOM"],
     "target": "ES5",

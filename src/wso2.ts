@@ -1,4 +1,4 @@
-import { BaseClaims, Verifier } from "@/jwt";
+import { BaseClaims, Verifier } from "./jwt";
 
 export class Ws02Verifier<T extends BaseClaims> extends Verifier<T> {
   /**

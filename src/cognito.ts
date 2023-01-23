@@ -1,4 +1,4 @@
-import { BaseClaims, Verifier } from "@/jwt";
+import { BaseClaims, Verifier } from "./jwt";
 
 export interface CognitoClaim extends BaseClaims {
   /**
