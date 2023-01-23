@@ -148,7 +148,7 @@ export class AuthorizerResponse {
     const apiGatewayParts = arnParts[5].split("/");
     return {
       region: arnParts[3],
-      awsAccountId: arnParts[3],
+      awsAccountId: arnParts[4],
       apiId: apiGatewayParts[0],
       stage: apiGatewayParts[1],
     };
