@@ -83,7 +83,9 @@ export class AuthorizerResponse {
   /**
    * The regular expression used to validate resource paths for the policy
    */
-  private readonly pathRegex = new RegExp("^[/.a-zA-Z0-9-_\\*]+$");
+  private readonly pathRegex = new RegExp(
+    "/^(\\/(?:[\\w\\-\\\\*]*)|(?:\\{[\\w]+\\}))+$/"
+  );
   principal: string;
   region: string;
   awsAccountId: string;
