@@ -17,5 +17,10 @@
     "outDir": "./lib",
     "declarationDir": "./lib/types"
   },
-  "include": ["src/**/*.ts"]
+  "include": [
+    "src/**/*.ts",
+    "serverless.ts",
+    "functions/**/*.ts",
+    "test/**/*.ts"
+  ]
 }
