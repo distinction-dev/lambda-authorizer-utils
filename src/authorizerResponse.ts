@@ -91,6 +91,7 @@ export class AuthorizerResponse {
   awsAccountId: string;
   apiId: string;
   stage: string;
+  disablePathCheck?: boolean;
   context?: Record<string, string | number | boolean>;
   usageIdentifierKey?: string;
   /**
@@ -129,6 +130,7 @@ export class AuthorizerResponse {
     awsAccountId: string,
     apiId: string,
     stage: string,
+    disablePathCheck?: boolean,
     context?: Record<string, string | number | boolean>,
     usageIdentifierKey?: string
   ) {
@@ -137,6 +139,7 @@ export class AuthorizerResponse {
     this.awsAccountId = awsAccountId;
     this.apiId = apiId;
     this.stage = stage;
+    this.disablePathCheck = disablePathCheck;
     this.context = context;
     this.usageIdentifierKey = usageIdentifierKey;
     this.allowedRoutes = [];
@@ -194,8 +197,10 @@ export class AuthorizerResponse {
     path: string,
     conditions?: Array<AwsPolicyCondition>
   ): void {
-    if (!this.pathRegex.test(path)) {
-      throw new Error("Invalid Path name");
+    if (!this.disablePathCheck) {
+      if (!this.pathRegex.test(path)) {
+        throw new Error("Invalid Path name");
+      }
     }
     if (effect === "Allow") {
       this.allowedRoutes.push({

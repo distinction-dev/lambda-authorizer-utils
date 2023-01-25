@@ -23,6 +23,7 @@ export async function handler(
         arnParts.awsAccountId,
         arnParts.apiId,
         arnParts.stage,
+        false,
         {
           ...claims,
         }
