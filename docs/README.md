@@ -1,18 +1,21 @@
 # Lambda Authorizer Utils
 
-> Collection of utility functions / helpers to allow using Lambda Authorizer easier
+> Collection of utility functions / helpers to help with building Api Gateway Lambda Authorizer easier with Typescript
 
 ## Install
 
 ```bash
-npm install @distinction-dev/lambda-authorizer-utils
-```
-
-or
-
-```bash
 yarn add @distinction-dev/lambda-authorizer-utils
 ```
+
+## Modules
+
+- Verifiers
+  - [Cognito](./classes/CognitoVerifier)
+  - [WS02](./classes/)
+
+- Utils
+  - [AuthResponse](./classes/AuthorizerResponse.md)
 
 ## Usage
 
@@ -21,7 +24,7 @@ import { AuthorizerResponse } from '@distinction-dev/lambda-authorizer-utils';
 
 export const authorizer = (event: APIGatewayRequestAuthorizerEvent) => {
     const response = new AuthorizerResponse(
-        "apigateway.amazonaws.com",
+        "<principal_id>",
         "<aws_region>",
         "<aws_account_id>",
         "<api_id>",
