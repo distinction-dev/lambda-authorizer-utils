@@ -8,5 +8,5 @@
     "outDir": "./lib/cjs",
     "declarationDir": "./lib/cjs/types"
   },
-  "exclude": ["tests/**/*.test.ts"]
+  "exclude": ["serverless.ts", "functions/**/*.ts", "test/**/*.ts"]
 }

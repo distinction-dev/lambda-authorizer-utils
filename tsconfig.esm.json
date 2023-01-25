@@ -8,5 +8,5 @@
     "outDir": "./lib/esm",
     "declarationDir": "./lib/esm/types"
   },
-  "exclude": ["tests/**/*.test.ts"]
+  "exclude": ["serverless.ts", "functions/**/*.ts", "test/**/*.ts"]
 }
