@@ -74,18 +74,18 @@ export type AwsPolicy = {
 };
 
 /**
+ * The regular expression used to validate resource paths for the policy
+ */
+export const PATH_REGEXP =
+  /^\/?(?:(?:(?:[\w\-\\*]*)|(?:\{[\w]+\}))\/)*(?:(?:[\w\-\\*]*)|(?:\{[\w]+\}))$/;
+
+/**
  * Based on:- https://github.com/awslabs/aws-apigateway-lambda-authorizer-blueprints/blob/master/blueprints/nodejs/index.js
  * Documentation:-
  * - https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-lambda-authorizer.html
  * - https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-lambda-authorizer-output.html
  */
 export class AuthorizerResponse {
-  /**
-   * The regular expression used to validate resource paths for the policy
-   */
-  private readonly pathRegex = new RegExp(
-    "/^(\\/(?:[\\w\\-\\\\*]*)|(?:\\{[\\w]+\\}))+$/"
-  );
   principal: string;
   region: string;
   awsAccountId: string;
@@ -198,7 +198,7 @@ export class AuthorizerResponse {
     conditions?: Array<AwsPolicyCondition>
   ): void {
     if (!this.disablePathCheck) {
-      if (!this.pathRegex.test(path)) {
+      if (!PATH_REGEXP.test(path)) {
         throw new Error(`Invalid Path name:- ${path}`);
       }
     }
