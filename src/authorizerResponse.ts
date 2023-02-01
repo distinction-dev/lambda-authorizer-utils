@@ -263,7 +263,7 @@ export class AuthorizerResponse {
    * Adds a '*' deny to the policy to deny access to all methods of an API
    */
   denyAllRoutes(): void {
-    this.addRoute("Allow", HttpVerbsEnum.ALL, "*");
+    this.addRoute("Deny", HttpVerbsEnum.ALL, "*");
   }
 
   /**

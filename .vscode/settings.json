@@ -2,5 +2,8 @@
   "editor.formatOnSave": true,
   "[typescript]": {
     "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
-  }
+  },
+  "conventionalCommits.scopes": [
+    "Deny All Routes"
+  ]
 }
