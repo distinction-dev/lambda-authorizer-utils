@@ -167,6 +167,27 @@ export class AuthorizerResponse {
     };
   }
 
+  public static fromMethodArn(
+    principalId: string,
+    arn: string,
+    disablePathCheck?: boolean,
+    context?: Record<string, string | number | boolean>,
+    usageIdentifierKey?: string
+  ): AuthorizerResponse {
+    const apiGatewayArnParts = AuthorizerResponse.parseApiGatewayArn(arn);
+
+    return new AuthorizerResponse(
+      principalId,
+      apiGatewayArnParts.region,
+      apiGatewayArnParts.awsAccountId,
+      apiGatewayArnParts.apiId,
+      apiGatewayArnParts.stage,
+      disablePathCheck,
+      context,
+      usageIdentifierKey
+    );
+  }
+
   private getStatementForEffect(
     effect: "Allow" | "Deny",
     routes: Array<AwsRoute>
