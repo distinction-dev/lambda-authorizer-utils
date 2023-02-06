@@ -27,6 +27,10 @@ export function buildRouteArn(
   while (path.startsWith("/")) {
     path = path.substring(1, path.length);
   }
+
+  // Match regex with path variables and replace them with "*"
+  const regex = /{[a-zA-Z_$]+[a-zA-Z0-9_$]*}/g;
+  path = path.replace(regex, "*");
   return `arn:aws:execute-api:${region}:${awsAccountId}:${apiId}/${stage}/${method}/${path}`;
 }
 
