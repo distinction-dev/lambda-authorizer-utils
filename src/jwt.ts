@@ -42,16 +42,33 @@ export class Verifier<T extends BaseClaims> {
    * @param disableCaching Caches keys for 24 hours, defaults to false
    * @returns {Verifier} Returns an instance of Verifier class
    */
-  public static fromToken<T extends BaseClaims>(
+  public static async fromToken<T extends BaseClaims>(
     inputToken: string,
+    allowedIssuers?: string[],
     keysUrlPath = ".well-known/jwks.json",
     disableCaching = false
-  ): Verifier<T> {
+  ): Promise<{ verifier: Verifier<T>; verifiedToken: T }> {
     const parsedToken = jwtDecode<T>(this.getCleanedJwt(inputToken));
     if (!keysUrlPath.startsWith("/")) {
       keysUrlPath = "/" + keysUrlPath;
     }
-    return new Verifier(`${parsedToken.iss}${keysUrlPath}`, disableCaching);
+    if (!parsedToken.iss) {
+      throw new Error("No issuer url found from the token passed");
+    }
+    if (allowedIssuers && !allowedIssuers.includes(parsedToken.iss)) {
+      throw new Error(
+        "Invalid Token issuer, the issuer from token doesn't match the allowed issuers"
+      );
+    }
+    const verifier = new Verifier<T>(
+      `${parsedToken.iss}${keysUrlPath}`,
+      disableCaching
+    );
+    const verifiedToken = await verifier.getVerifiedToken(inputToken);
+    return {
+      verifier,
+      verifiedToken,
+    };
   }
 
   private async getPublicKeys(): Promise<Array<PublicKey>> {
