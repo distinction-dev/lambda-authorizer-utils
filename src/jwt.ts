@@ -34,15 +34,17 @@ export class Verifier<T extends BaseClaims> {
   }
 
   /**
-   * Static method to instantiate a Verifier class
+   * Static method to instantiate a Verifier class from an existing token
+   * This is useful when you wanna use the instance caching so public keys are cached
+   * and the issuer url can be taken from the token
    * @param inputToken The input token you get from the request
-   * @param keysUrlPath The URL path to the public keys
+   * @param keysUrlPath The path to the public keys json from the iss url
    * @param disableCaching Caches keys for 24 hours, defaults to false
    * @returns {Verifier} Returns an instance of Verifier class
    */
   public static fromToken<T extends BaseClaims>(
     inputToken: string,
-    keysUrlPath: string,
+    keysUrlPath = ".well-known/jwks.json",
     disableCaching = false
   ): Verifier<T> {
     const parsedToken = jwtDecode<T>(this.getCleanedJwt(inputToken));
