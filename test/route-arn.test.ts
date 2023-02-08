@@ -1,5 +1,5 @@
 import "mocha";
-import { buildRouteArn } from "../src";
+import { AuthorizerResponse } from "../src";
 import { expect } from "chai";
 
 const region = "us-west-2";
@@ -12,7 +12,7 @@ describe("Route ARN Path Regex Test Suite", () => {
   it("Will replace path variables with '*'", () => {
     const path = "/variable/{id}";
 
-    const result = buildRouteArn(
+    const result = AuthorizerResponse.buildRouteArn(
       region,
       awsAccountId,
       apiId,
@@ -27,7 +27,7 @@ describe("Route ARN Path Regex Test Suite", () => {
   it("Will replace multiple path variables with '*'", () => {
     const path = "/variable/{id}/hello/{name}";
 
-    const result = buildRouteArn(
+    const result = AuthorizerResponse.buildRouteArn(
       region,
       awsAccountId,
       apiId,

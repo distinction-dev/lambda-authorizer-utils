@@ -15,25 +15,6 @@ export const DENY_ALL_RESPONSE: AwsPolicy = {
   },
 };
 
-export function buildRouteArn(
-  region: string,
-  awsAccountId: string,
-  apiId: string,
-  stage: string,
-  method: string,
-  path: string
-): string {
-  // Clean all starting / from path
-  while (path.startsWith("/")) {
-    path = path.substring(1, path.length);
-  }
-
-  // Match regex with path variables and replace them with "*"
-  const regex = /{[a-zA-Z_$]+[a-zA-Z0-9_$]*}/g;
-  path = path.replace(regex, "*");
-  return `arn:aws:execute-api:${region}:${awsAccountId}:${apiId}/${stage}/${method}/${path}`;
-}
-
 export type ApiGatewayArnParts = {
   region: string;
   awsAccountId: string;
@@ -171,6 +152,25 @@ export class AuthorizerResponse {
     };
   }
 
+  public static buildRouteArn(
+    region: string,
+    awsAccountId: string,
+    apiId: string,
+    stage: string,
+    method: string,
+    path: string
+  ): string {
+    // Clean all starting / from path
+    while (path.startsWith("/")) {
+      path = path.substring(1, path.length);
+    }
+
+    // Match regex with path variables and replace them with "*"
+    const regex = /{[a-zA-Z_$]+[a-zA-Z0-9_$]*}/g;
+    path = path.replace(regex, "*");
+    return `arn:aws:execute-api:${region}:${awsAccountId}:${apiId}/${stage}/${method}/${path}`;
+  }
+
   public static fromMethodArn(
     principalId: string,
     arn: string,
@@ -229,7 +229,7 @@ export class AuthorizerResponse {
     }
     if (effect === "Allow") {
       this.allowedRoutes.push({
-        resourceArn: buildRouteArn(
+        resourceArn: AuthorizerResponse.buildRouteArn(
           this.region,
           this.awsAccountId,
           this.apiId,
@@ -241,7 +241,7 @@ export class AuthorizerResponse {
       });
     } else {
       this.deniedRoutes.push({
-        resourceArn: buildRouteArn(
+        resourceArn: AuthorizerResponse.buildRouteArn(
           this.region,
           this.awsAccountId,
           this.apiId,
