@@ -33,6 +33,25 @@ export class Verifier<T extends BaseClaims> {
     this.disableCaching = disableCaching;
   }
 
+  /**
+   * Static method to instantiate a Verifier class
+   * @param inputToken The input token you get from the request
+   * @param keysUrlPath The URL path to the public keys
+   * @param disableCaching Caches keys for 24 hours, defaults to false
+   * @returns {Verifier} Returns an instance of Verifier class
+   */
+  public static fromToken<T extends BaseClaims>(
+    inputToken: string,
+    keysUrlPath: string,
+    disableCaching = false
+  ): Verifier<T> {
+    const parsedToken = jwtDecode<T>(this.getCleanedJwt(inputToken));
+    if (!keysUrlPath.startsWith("/")) {
+      keysUrlPath = "/" + keysUrlPath;
+    }
+    return new Verifier(`${parsedToken.iss}${keysUrlPath}`, disableCaching);
+  }
+
   private async getPublicKeys(): Promise<Array<PublicKey>> {
     if (!this.publicKeys) {
       if (!this.disableCaching) {
