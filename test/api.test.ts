@@ -16,6 +16,12 @@ describe("API Test Suite", () => {
     },
     "test-key"
   ).compact();
+  const azureToken = create(
+    {
+      email: "admin@distinction.dev",
+    },
+    "test-key"
+  ).compact();
   it("Will allow superuser", async () => {
     const response = await axios.get(
       "https://np6plfykai.execute-api.us-east-1.amazonaws.com/dev/hello",

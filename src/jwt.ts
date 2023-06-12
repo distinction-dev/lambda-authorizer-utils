@@ -4,11 +4,14 @@ import jwtDecode from "jwt-decode";
 
 export interface PublicKey {
   kid: string;
-  alg: string;
+  alg?: string;
   kty: string;
   e: string;
   n: string;
   use: string;
+  x5c?: string[];
+  x5t?: string;
+  issuer?: string;
 }
 
 export interface BaseClaims {
@@ -81,7 +84,7 @@ export class Verifier<T extends BaseClaims> {
     return this.publicKeys;
   }
 
-  private async fetchKeys(): Promise<Array<PublicKey>> {
+  public async fetchKeys(): Promise<Array<PublicKey>> {
     return (
       await axios.get<{ keys: Array<PublicKey> }>(this.keysUrl, {
         timeout: 5000,
@@ -126,7 +129,8 @@ export class Verifier<T extends BaseClaims> {
 
     const joseKey = await jose.JWK.asKey(myPublicKey);
 
-    const verifiedToken = await jose.JWS.createVerify(joseKey).verify(token);
+    const verifier = jose.JWS.createVerify([joseKey]);
+    const verifiedToken = await verifier.verify(token);
 
     const claims = JSON.parse(verifiedToken.payload.toString()) as T;
 

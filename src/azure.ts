@@ -5,7 +5,10 @@ export interface AzureClaim extends BaseClaims {
    * This is the user email and name in token
    */
   name: string;
+  groups: Array<string>; // array of group ids associated with user
+  roles: Array<string>; // array of roles associated with users
   preferred_username: string;
+  oid: string; // This is user id
   aud: string; // This is AppId of Azure AD
 }
 
