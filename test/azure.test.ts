@@ -35,41 +35,6 @@ describe("JWT Test Suite", async () => {
   try {
     console.log("started!!!!!!!!!!!!!!!!");
 
-    const privateKey = await jose.JWK.asKey(
-      fs.readFileSync(path.join(__dirname, "../private.pem")),
-      "pem"
-    );
-    console.log({ privateKey });
-    const publicKey = await jose.JWK.asKey(
-      fs.readFileSync(path.join(__dirname, "../public.cer")),
-      "pem"
-    );
-
-    console.log({ privateKey, publicKey });
-
-    const azurePassToken = create(
-      {
-        email: "jay@distinction.dev",
-        preferred_username: "jay@distinction.dev",
-        groups: ["1c68c7fb-e0f6-497c-9375-6b89bcbd48fc"],
-        roles: ["Write", "Admin"],
-        aud: "a5c5107b-1258-4437-b212-aa1405593fbf",
-        oid: "e9de1d8c-f6a4-44b2-857d-c188b7299953",
-      },
-      await privateKey.thumbprint()
-    )
-      .setHeader("kid", privateKey.kid)
-      .setHeader("x5t", privateKey.kid);
-
-    // const azureFailToken = create(
-    //   {
-    //     email: "jay@distinction.dev",
-    //   },
-    //   "test-key"
-    // ).compact();
-
-    console.log({ azurePassToken: azurePassToken.compact() });
-
     const keys = (): Promise<Array<PublicKey>> => {
       return new Promise(resolve => {
         resolve([
@@ -87,11 +52,50 @@ describe("JWT Test Suite", async () => {
       return await keys();
     };
 
+    const privateKey = await jose.JWK.asKey(
+      fs.readFileSync(path.join(__dirname, "../private.pem")),
+      "pem"
+    );
+    const publicKey = await jose.JWK.asKey(
+      fs.readFileSync(path.join(__dirname, "../public.cer")),
+      "pem"
+    );
+
+    console.log({ privateKey, publicKey: publicKey.toJSON() });
+
+    const payload = {
+      email: "jay@distinction.dev",
+      preferred_username: "jay@distinction.dev",
+      groups: ["1c68c7fb-e0f6-497c-9375-6b89bcbd48fc"],
+      roles: ["Write", "Admin"],
+      aud: "a5c5107b-1258-4437-b212-aa1405593fbf",
+      oid: "e9de1d8c-f6a4-44b2-857d-c188b7299953",
+    };
+
+    const azurePassToken = create(payload, privateKey.toJSON())
+      .setHeader("kid", privateKey.kid)
+      .setHeader("x5t", privateKey.kid);
+
+    const opt = { compact: true, jwk: privateKey, fields: { typ: "jwt" } };
+    const token = await jose.JWS.createSign(opt, privateKey)
+      .update(JSON.stringify(payload))
+      .final();
+
+    console.log({ toekn: token, azurePassToken: azurePassToken.compact() });
+
     it("Valid Azure Token", async () => {
-      const token = await verifier.verify(azurePassToken.compact());
-      console.log("Valid: ", token);
-      expect(token).to.equal(true);
+      const result = await verifier.verify(token as any);
+      console.log("Valid: ", result);
+      expect(result).to.equal(true);
     });
+
+    // const azureFailToken = create(
+    //   {
+    //     email: "jay@distinction.dev",
+    //   },
+    //   "test-key"
+    // ).compact();
+
     // it("Invalid Azure Token", async () => {
     //   const token = await verifier.verify(azureFailToken);
     //   console.log("Invalid: ", token);
