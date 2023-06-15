@@ -8,8 +8,6 @@ import path from "path";
 // eslint-disable-next-line @typescript-eslint/no-misused-promises
 describe("JWT Test Suite", async () => {
   try {
-    console.log("started!!!!!!!!!!!!!!!!");
-
     const privateKey = await jose.JWK.asKey(
       fs.readFileSync(path.join(__dirname, "../private.pem")),
       "pem"

@@ -18,5 +18,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - run: yarn install --frozen-lockfile
+      - run: openssl genrsa -out private.pem 4096
+      - run: openssl req -new -x509 -key private.pem -out public.cer -subj '/C=IN/ST=Gujarat/L=Rajkot/O=Distinction/OU=services/CN=distinction.dev/emailAddress=jay@distinction.dev'
       - run: yarn build
       - run: yarn test
