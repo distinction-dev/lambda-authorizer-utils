@@ -31,7 +31,8 @@ export class AzureVerifier extends Verifier<AzureClaim> {
     const claims = await this.getVerifiedToken(token);
 
     if (!claims.iss.includes(this.tenantId)) {
-      throw Error("iss claim does not match with tenant ID.");
+      console.error("iss claim does not match with tenant ID.");
+      return false;
     }
     return true;
   }
