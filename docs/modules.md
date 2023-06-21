@@ -16,6 +16,7 @@
 ### Interfaces
 
 - [Claims](interfaces/Claims.md)
+- [AzureClaims](interfaces/AzureClaims.md)
 - [PublicKey](interfaces/PublicKey.md)
 
 ### Type Aliases
@@ -27,7 +28,7 @@
 
 ### Variables
 
-- [DENY\_ALL\_RESPONSE](modules.md#deny_all_response)
+- [DENY_ALL_RESPONSE](modules.md#deny_all_response)
 
 ### Functions
 
@@ -41,20 +42,20 @@
 
 #### Type declaration
 
-| Name | Type |
-| :------ | :------ |
-| `context?` | `Record`<`string`, `string` \| `number` \| `boolean`\> |
-| `policyDocument` | { `Statement`: [`AwsStatement`](modules.md#awsstatement)[] ; `Version`: ``"2012-10-17"``  } |
-| `policyDocument.Statement` | [`AwsStatement`](modules.md#awsstatement)[] |
-| `policyDocument.Version` | ``"2012-10-17"`` |
-| `principalId` | `string` |
-| `usageIdentifierKey?` | `string` |
+| Name                       | Type                                                                                     |
+| :------------------------- | :--------------------------------------------------------------------------------------- |
+| `context?`                 | `Record`<`string`, `string` \| `number` \| `boolean`\>                                   |
+| `policyDocument`           | { `Statement`: [`AwsStatement`](modules.md#awsstatement)[] ; `Version`: `"2012-10-17"` } |
+| `policyDocument.Statement` | [`AwsStatement`](modules.md#awsstatement)[]                                              |
+| `policyDocument.Version`   | `"2012-10-17"`                                                                           |
+| `principalId`              | `string`                                                                                 |
+| `usageIdentifierKey?`      | `string`                                                                                 |
 
 #### Defined in
 
 [authorizerResponse.ts:56](https://github.com/distinction-dev/lambda-authorizer-utils/blob/3d085bb/src/authorizerResponse.ts#L56)
 
-___
+---
 
 ### AwsPolicyCondition
 
@@ -64,7 +65,7 @@ ___
 
 [authorizerResponse.ts:45](https://github.com/distinction-dev/lambda-authorizer-utils/blob/3d085bb/src/authorizerResponse.ts#L45)
 
-___
+---
 
 ### AwsRoute
 
@@ -72,16 +73,16 @@ ___
 
 #### Type declaration
 
-| Name | Type |
-| :------ | :------ |
+| Name          | Type                                                    |
+| :------------ | :------------------------------------------------------ |
 | `conditions?` | [`AwsPolicyCondition`](modules.md#awspolicycondition)[] |
-| `resourceArn` | `string` |
+| `resourceArn` | `string`                                                |
 
 #### Defined in
 
 [authorizerResponse.ts:46](https://github.com/distinction-dev/lambda-authorizer-utils/blob/3d085bb/src/authorizerResponse.ts#L46)
 
-___
+---
 
 ### AwsStatement
 
@@ -89,12 +90,12 @@ ___
 
 #### Type declaration
 
-| Name | Type |
-| :------ | :------ |
-| `Action` | `string` |
+| Name         | Type                                                    |
+| :----------- | :------------------------------------------------------ |
+| `Action`     | `string`                                                |
 | `Condition?` | [`AwsPolicyCondition`](modules.md#awspolicycondition)[] |
-| `Effect` | ``"Allow"`` \| ``"Deny"`` |
-| `Resource` | `string`[] |
+| `Effect`     | `"Allow"` \| `"Deny"`                                   |
+| `Resource`   | `string`[]                                              |
 
 #### Defined in
 
@@ -102,20 +103,20 @@ ___
 
 ## Variables
 
-### DENY\_ALL\_RESPONSE
+### DENY_ALL_RESPONSE
 
-• `Const` **DENY\_ALL\_RESPONSE**: `Object`
+• `Const` **DENY_ALL_RESPONSE**: `Object`
 
 Deny access to the api completely
 
 #### Type declaration
 
-| Name | Type |
-| :------ | :------ |
-| `policyDocument` | { `Statement`: { `Action`: `string` = "execute-api:Invoke"; `Effect`: `string` = "Deny"; `Resource`: `string`[]  }[] ; `Version`: `string` = "2012-10-17" } |
-| `policyDocument.Statement` | { `Action`: `string` = "execute-api:Invoke"; `Effect`: `string` = "Deny"; `Resource`: `string`[]  }[] |
-| `policyDocument.Version` | `string` |
-| `principalId` | `string` |
+| Name                       | Type                                                                                                                                                       |
+| :------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `policyDocument`           | { `Statement`: { `Action`: `string` = "execute-api:Invoke"; `Effect`: `string` = "Deny"; `Resource`: `string`[] }[] ; `Version`: `string` = "2012-10-17" } |
+| `policyDocument.Statement` | { `Action`: `string` = "execute-api:Invoke"; `Effect`: `string` = "Deny"; `Resource`: `string`[] }[]                                                       |
+| `policyDocument.Version`   | `string`                                                                                                                                                   |
+| `principalId`              | `string`                                                                                                                                                   |
 
 #### Defined in
 
@@ -129,14 +130,14 @@ Deny access to the api completely
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `region` | `string` |
+| Name           | Type     |
+| :------------- | :------- |
+| `region`       | `string` |
 | `awsAccountId` | `string` |
-| `apiId` | `string` |
-| `stage` | `string` |
-| `method` | `string` |
-| `path` | `string` |
+| `apiId`        | `string` |
+| `stage`        | `string` |
+| `method`       | `string` |
+| `path`         | `string` |
 
 #### Returns
 
