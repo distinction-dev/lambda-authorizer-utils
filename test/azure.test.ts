@@ -1,5 +1,5 @@
 import "mocha";
-import { expect } from "chai";
+import { assert, expect } from "chai";
 import { AzureVerifier, PublicKey } from "../src";
 import * as jose from "node-jose";
 import * as fs from "fs";
@@ -55,7 +55,12 @@ describe("JWT Test Suite", async () => {
 
     const opt = { compact: true, jwk: privateKey, fields: { typ: "jwt" } };
     const azurePassToken = await jose.JWS.createSign(opt, privateKey)
-      .update(JSON.stringify(payload))
+      .update(
+        JSON.stringify({
+          ...payload,
+          exp: new Date().getTime() / 1000 + 60 * 60,
+        })
+      )
       .final();
 
     it("Valid Azure Token", async () => {
@@ -63,13 +68,49 @@ describe("JWT Test Suite", async () => {
       expect(result).to.equal(true);
     });
 
-    const azureFailToken = await jose.JWS.createSign(opt, privateKey)
-      .update(JSON.stringify({ ...payload, iss: "adsasdasd" }))
+    const azureISSFailToken = await jose.JWS.createSign(opt, privateKey)
+      .update(
+        JSON.stringify({
+          ...payload,
+          iss: "adsasdasd",
+          exp: new Date().getTime() / 1000 + 60 * 60,
+        })
+      )
       .final();
 
-    it("Invalid Azure Token", async () => {
-      const token = await verifier.verify(azureFailToken as any);
-      expect(token).to.equal(false);
+    it("Invalid ISS Azure Token", async () => {
+      try {
+        const token = await verifier.verify(azureISSFailToken as any);
+        expect(token).to.equal(false);
+      } catch (error: any) {
+        assert.isNotNull(error?.message);
+        if (error?.message) {
+          expect(error.message).to.equal(
+            "iss claim does not match with tenant ID"
+          );
+        }
+      }
+    });
+
+    const azureExpFailToken = await jose.JWS.createSign(opt, privateKey)
+      .update(
+        JSON.stringify({
+          ...payload,
+          exp: new Date().getTime() / 1000 - 60 * 60,
+        })
+      )
+      .final();
+
+    it("Invalid Expired Azure Token", async () => {
+      try {
+        const token = await verifier.verify(azureExpFailToken as any);
+        expect(token).to.equal(false);
+      } catch (error: any) {
+        assert.isNotNull(error?.message);
+        if (error?.message) {
+          expect(error.message).to.equal("Token is expired");
+        }
+      }
     });
   } catch (error) {
     console.log(error);
