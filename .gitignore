@@ -119,3 +119,7 @@ dist
 lib/
 package/
 .DS_Store
+
+# Garbage Files
+*.pem
+*.cer

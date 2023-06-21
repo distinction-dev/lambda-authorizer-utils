@@ -11,7 +11,9 @@ yarn add @distinction-dev/lambda-authorizer-utils
 ## Modules
 
 - Verifiers
+
   - [Cognito](./classes/CognitoVerifier)
+  - [Azure](./classes/AzureVerifier)
   - [WS02](./classes/)
 
 - Utils
@@ -20,20 +22,19 @@ yarn add @distinction-dev/lambda-authorizer-utils
 ## Usage
 
 ```ts
-import { AuthorizerResponse } from '@distinction-dev/lambda-authorizer-utils';
+import { AuthorizerResponse } from "@distinction-dev/lambda-authorizer-utils";
 
 export const authorizer = (event: APIGatewayRequestAuthorizerEvent) => {
-    const response = new AuthorizerResponse(
-        "<principal_id>",
-        "<aws_region>",
-        "<aws_account_id>",
-        "<api_id>",
-        "<api_stage>"
-    )
-    response.addRoute("GET", "/test")
-    return response.getPolicy()
-}
-
+  const response = new AuthorizerResponse(
+    "<principal_id>",
+    "<aws_region>",
+    "<aws_account_id>",
+    "<api_id>",
+    "<api_stage>"
+  );
+  response.addRoute("GET", "/test");
+  return response.getPolicy();
+};
 ```
 
 ## Docs

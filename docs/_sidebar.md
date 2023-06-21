@@ -4,9 +4,10 @@
   - [Modules](modules.md)
 
 - Utils
-  - [Response](/classes/AuthorizerResponse.md)
-  - [Deny All](/classes/DenyAll.md)
+  - [Response](./classes/AuthorizerResponse.md)
+  - [Deny All](./classes/DenyAll.md)
 
 - Verifiers
 
-  - [Cognito](/classes/CognitoVerifier.md)
+  - [Cognito](./classes/CognitoVerifier.md)
+  - [Azure](./classes/AzureVerifier.md)
