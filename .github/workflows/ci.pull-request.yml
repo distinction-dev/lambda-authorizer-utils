@@ -22,4 +22,5 @@ jobs:
       - run: openssl req -new -x509 -key private.pem -out public.cer -subj '/C=IN'
       - run: yarn build
       - run: yarn test
+      - run: yarn test:unit
       - run: rm -rf private.pem public.cer
