@@ -18,7 +18,7 @@ describe("API Test Suite", () => {
   ).compact();
   it("Will allow superuser", async () => {
     const response = await axios.get(
-      "https://np6plfykai.execute-api.us-east-1.amazonaws.com/dev/hello",
+      "https://xyym7mxtoa.execute-api.us-east-1.amazonaws.com/dev/hello",
       {
         headers: {
           Authorization: superUserToken,
@@ -29,7 +29,7 @@ describe("API Test Suite", () => {
   });
   it("Will allow /hello to admin", async () => {
     const response = await axios.get(
-      "https://np6plfykai.execute-api.us-east-1.amazonaws.com/dev/hello",
+      "https://xyym7mxtoa.execute-api.us-east-1.amazonaws.com/dev/hello",
       {
         headers: {
           Authorization: adminToken,
@@ -40,7 +40,7 @@ describe("API Test Suite", () => {
   });
   it("Will allow /variable/{id} to admin", async () => {
     const response = await axios.get(
-      "https://np6plfykai.execute-api.us-east-1.amazonaws.com/dev/variable/420",
+      "https://xyym7mxtoa.execute-api.us-east-1.amazonaws.com/dev/variable/420",
       {
         headers: {
           Authorization: adminToken,
@@ -52,7 +52,7 @@ describe("API Test Suite", () => {
   it("Will not allow /hello2 to admin", async () => {
     try {
       await axios.get(
-        "https://np6plfykai.execute-api.us-east-1.amazonaws.com/dev/hello2",
+        "https://xyym7mxtoa.execute-api.us-east-1.amazonaws.com/dev/hello2",
         {
           headers: {
             Authorization: adminToken,
